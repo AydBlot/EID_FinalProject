@@ -23,26 +23,17 @@ class VideoCamera(object):
             return np.flip(frame, 0)
         return frame
     
-    def get_frame(self):
-        frame = self.flip_if_needed(self.vs.read())
-        ret, jpeg = cv2.imencode('.jpg', frame)
-        return jpeg.tobytes()
-    
     def get_object(self, classifier):
         timestamp = datetime.datetime.now()
         ts = timestamp.strftime("%A %d %B %Y %I:%M:%S.%f%p")
         found_objects = False
         frame = self.flip_if_needed(self.vs.read()).copy() 
         newframe = imutils.rotate(frame, -90)
-        status = cv2.imwrite('/home/pi/images/test.jpg', newframe)
-        print("Image written to file-system : ",status)
         #img = cv2.imread('photo-1507003211169-0a1dd7228f2d.jpg')
-        img = cv2.imread('/home/pi/images/test.jpg')
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(newframe, cv2.COLOR_BGR2GRAY)
 
         objects = classifier.detectMultiScale(gray, scaleFactor=1.1, 
 		minNeighbors=5, minSize=(30, 30))
-        print("objects:{}".format(objects))
 
         if len(objects) > 0:
             found_objects = True
@@ -50,7 +41,7 @@ class VideoCamera(object):
 
         # Draw a rectangle around the objects
         for (x, y, w, h) in objects:
-            frame2 = cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            frame2 = cv2.rectangle(newframe, (x, y), (x + w, y + h), (255, 0, 0), 2)
             #t = TempImage()
             #t.cleanup()
 
@@ -58,4 +49,4 @@ class VideoCamera(object):
         #cv2.imshow("feed",frame)
         #cv2.waitKey(1000)
         ret, jpeg = cv2.imencode('.jpg', frame)
-        return (jpeg.tobytes(), found_objects, frame)
+        return (jpeg.tobytes(), found_objects, newframe)
