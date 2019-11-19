@@ -70,7 +70,7 @@ def check_for_face():
     while True:
         try:
             _, found_face, frame = video_camera.get_object(object_classifier)
-            if found_face and (time.time() - image_delay_time) > 3:
+            if found_face and (time.time() - image_delay_time) > 5:
                 print(time.time() - image_delay_time)
                 print("Face Recognized")
                 status = cv2.imwrite('/home/pi/images/test.jpg', frame)
@@ -82,6 +82,7 @@ def check_for_face():
                 #Update the read permissions so the lambda function can access the newly added s3 object
                 os.system("aws s3api put-object-acl --bucket {0} --key {1} --acl public-read".format(NEW_FACE_BUCKET_NAME, t.path))
                 image_delay_time = time.time()
+                t.cleanup()
         except:
             print("camera object not working:", sys.exc_info()[0])
 
