@@ -44,6 +44,12 @@ def confirm_receive(self, params, packet):
     print("--------new Payload------")
     print("Topic: {} ".format(packet.topic))
     print("Message: {} ".format(packet.payload))
+    if "Matches" in str(packet.payload):
+        split_payload = str(packet.payload).split('Matches ')
+        name = split_payload[1].split('.')
+        os.system("espeak 'Welcome back, {}!' --stdout | aplay".format(name[0]))
+    else:
+        os.system("espeak 'You are not welcome here.' --stdout | aplay")
 
 #Subscribe the MQTT client to a topic
 myMQTTClient.subscribe("facial/recognition/confirm", 1, confirm_receive)
