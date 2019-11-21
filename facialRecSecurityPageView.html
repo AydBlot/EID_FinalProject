@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- **DO THIS**: -->
+    <!--   Replace SDK_VERSION_NUMBER with the current SDK version number -->
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.576.0.min.js"></script>
+    <script src="./photoViewer.js"></script>
+    <script defer>
+	    viewKnownObjects(); 
+	    viewNewObjects();
+    </script>
+  </head>
+  <body>
+    <div class="left_sidebar">
+	  <div class="container">
+		  <div class="col-md-6"> 
+			  <h1>Known Faces</h1>
+			  <div id="known" />
+		  </div>
+	  </div>
+   </div>
+    <div class="right_sidebar">
+	  <div class="container">
+		  <div class="col-md-6"> 
+			  <h1>New Faces</h1>
+			  <div id="new" />
+		  </div>
+	  </div>
+   </div>
+  </body>
+</html>
