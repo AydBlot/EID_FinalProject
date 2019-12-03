@@ -1,27 +1,7 @@
 <!DOCTYPE html>
-<style>
-#right-container {
-   display: inline-block;
-   position: relative;
-   height: 50%;
-   width: 50%;
-   float: right;
-   box-shadow: 0 0 1em 1em #ccc;
-}
-#left-container {
-   display: inline-block;
-   position: relative;
-   height: 45%;
-   width: 45%;
-   float: left;
-   box-shadow: 0 0 1em 1em #ccc;
-}
-.photo-style {
-  text-align:center
-}
-</style>
 <html>
   <head>
+  <link rel="stylesheet" type="text/css" href="./style.css">
     <!-- **DO THIS**: -->
     <!--   Replace SDK_VERSION_NUMBER with the current SDK version number -->
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.576.0.min.js"></script>
@@ -34,12 +14,21 @@
   <body>
   <h1 align="center">Facial Recognition Security System Images</h1>
   <div id="right-container">
-	  <h2>Known Faces</h2>
+	  <h2 align="center">Known Faces</h2>
+	  <div id="wrapper">
+		  <button align="center" class="btn" onclick="viewKnownObjects()">Update Known Faces</button>
+	  </div>
+	  <p/>
 	  <div id="known">
 	  </div>
+
   </div>
   <div id="left-container">
-	  <h2>New Faces</h2>
+	  <h2 align="center">New Faces</h2>
+	  <div id="wrapper">
+		  <button align="center" class="btn" onclick="viewNewObjects()">Update New Faces</button>
+	  </div>
+	  <p/>
 	  <div id="new">
 	  </div>	  
   </div>
