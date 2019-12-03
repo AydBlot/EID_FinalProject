@@ -43,7 +43,7 @@ print("Successfully Connected to Broker")
 def confirm_receive(self, params, packet):
     print("--------new Payload------")
     print("Topic: {} ".format(packet.topic))
-    print("Message: {} ".format(packet.payload))
+    print("Message:{}".format(packet.payload))
     if "Matches" in str(packet.payload):
         split_payload = str(packet.payload).split('Matches ')
         name = split_payload[1].split('.')
@@ -68,9 +68,9 @@ class TempImage:
 		# remove the file
         os.remove(self.path)
 
-SOURCE_FILENAME = '/home/pi/images/test.jpg'
 NEW_FACE_BUCKET_NAME = 'facialrecnewfacebucket'
 
+#Function that checks for a face in the videstream every 5 seconds
 def check_for_face():
     image_delay_time = 0
     while True:

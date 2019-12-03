@@ -1,4 +1,25 @@
 <!DOCTYPE html>
+<style>
+#right-container {
+   display: inline-block;
+   position: relative;
+   height: 50%;
+   width: 50%;
+   float: right;
+   box-shadow: 0 0 1em 1em #ccc;
+}
+#left-container {
+   display: inline-block;
+   position: relative;
+   height: 45%;
+   width: 45%;
+   float: left;
+   box-shadow: 0 0 1em 1em #ccc;
+}
+.photo-style {
+  text-align:center
+}
+</style>
 <html>
   <head>
     <!-- **DO THIS**: -->
@@ -11,21 +32,16 @@
     </script>
   </head>
   <body>
-    <div class="left_sidebar">
-	  <div class="container">
-		  <div class="col-md-6"> 
-			  <h1>Known Faces</h1>
-			  <div id="known" />
-		  </div>
+  <h1 align="center">Facial Recognition Security System Images</h1>
+  <div id="right-container">
+	  <h2>Known Faces</h2>
+	  <div id="known">
 	  </div>
-   </div>
-    <div class="right_sidebar">
-	  <div class="container">
-		  <div class="col-md-6"> 
-			  <h1>New Faces</h1>
-			  <div id="new" />
-		  </div>
-	  </div>
-   </div>
+  </div>
+  <div id="left-container">
+	  <h2>New Faces</h2>
+	  <div id="new">
+	  </div>	  
+  </div>
   </body>
 </html>

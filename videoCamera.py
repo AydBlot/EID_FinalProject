@@ -1,3 +1,4 @@
+#utilized code from just4give/home-surveillance github repo as basis for code
 import cv2
 from imutils.video.pivideostream import PiVideoStream
 import imutils
@@ -23,6 +24,7 @@ class VideoCamera(object):
             return np.flip(frame, 0)
         return frame
     
+    #Grab an image and rotate to ensure it is in the proper orientation
     def get_object(self, classifier):
         timestamp = datetime.datetime.now()
         ts = timestamp.strftime("%A %d %B %Y %I:%M:%S.%f%p")

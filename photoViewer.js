@@ -45,14 +45,14 @@ function viewKnownObjects() {
       var photoUrl = bucketUrl + encodeURIComponent(photoKey);
       return getHtml([
         '<span>',
-          '<div>',
-            '<br/>',
-            '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>',
-          '</div>',
-          '<div>',
+          '<div class="photo-style">',
             '<span>',
               photoKey,
             '</span>',
+          '</div>',
+          '<div class="photo-style">',
+            '<img style="width:256px;height:256px;" src="' + photoUrl + '"/>',
+            '<p/>',
           '</div>',
         '</span>',
       ]);
@@ -79,14 +79,14 @@ function viewNewObjects() {
       var photoUrl = bucketUrl + encodeURIComponent(photoKey);
       return getHtml([
         '<span>',
-          '<div>',
-            '<br/>',
-            '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>',
-          '</div>',
-          '<div>',
+          '<div class="photo-style">',
             '<span>',
               photoKey,
             '</span>',
+          '</div>',
+          '<div class="photo-style">',
+            '<img style="width:256px;height:256px;" src="' + photoUrl + '"/>',
+            '<p/>',
           '</div>',
         '</span>',
       ]);
