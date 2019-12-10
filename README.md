@@ -13,7 +13,8 @@ Developers: Ayden Blotnick and Ajitesh Batra
 
 5. Install the AWS python sdk library with pip3 install boto3
 
-6. For SpeechRecognition python library:
-pip3 install SpeechRecognition
-sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg
-pip3 install pyaudio
+6. For SpeechRecognition python library: </br>
+pip3 install SpeechRecognition </br>
+sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg </br>
+pip3 install pyaudio </br>
+sudo apt-get install flac </br>
