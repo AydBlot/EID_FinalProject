@@ -25,9 +25,17 @@ var s3New = new AWS.S3({
   params: {Bucket: newAlbumBucketName}
 });
 
+var s3 = new AWS.S3();
+
 // A utility function to create HTML.
 function getHtml(template) {
   return template.join('\n');
+}
+
+function openPopup(d){
+	var popup = document.getElementById("myPopup");
+	popup.classList.add("show");
+	document.getElementById("hiddenName").value = d.getAttribute("id");
 }
 
 // Show the photos that exist in an album.
@@ -43,6 +51,7 @@ function viewKnownObjects() {
     var photos = data.Contents.map(function(photo) {
       var photoKey = photo.Key;
       var photoUrl = bucketUrl + encodeURIComponent(photoKey);
+      console.log(photoUrl)
       return getHtml([
         '<span>',
           '<div class="photo-style">',
@@ -51,7 +60,7 @@ function viewKnownObjects() {
             '</span>',
           '</div>',
           '<div class="photo-style">',
-            '<img style="width:256px;height:256px;" src="' + photoUrl + '"/>',
+            '<img style="width:256px;height:256px;" src="' + photoUrl + '" id="' + photoKey + '" onclick="openPopup(this)"/>',
             '<p/>',
           '</div>',
         '</span>',
@@ -63,6 +72,7 @@ function viewKnownObjects() {
     document.getElementById('known').innerHTML = getHtml(photos);
   });
 }
+
 
 // Show the photos that exist in an album.
 function viewNewObjects() {
@@ -96,4 +106,33 @@ function viewNewObjects() {
       '<p>There are no photos in this album.</p>';
     document.getElementById('new').innerHTML = getHtml(photos);
   });
+}
+
+function cancelNameUpdate() {
+	var popup = document.getElementById("myPopup");
+	popup.classList.remove("show");
+}
+
+function updateName() {
+	var form = document.querySelector("#updateNameForm");
+	var formData = new FormData(form)
+	console.log(formData.get('newName'))
+	newKey=formData.get('newName')
+        oldKey = formData.get('hiddenName')
+	//Copy the object to a new location
+	s3.copyObject({
+	  Bucket: knownAlbumBucketName, 
+	  CopySource: `${knownAlbumBucketName}${oldKey}`, 
+	  Key: newKey
+	 })
+	  .promise()
+	  .then(() => 
+	    // Delete the old object
+	    s3.deleteObject({
+	      Bucket: knownAlbumBucketName, 
+	      Key: newKey 
+	    }).promise()
+	   )
+	  // Error handling is left up to reader
+	  .catch((e) => console.error(e))	
 }
