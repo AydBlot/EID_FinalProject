@@ -1,7 +1,7 @@
-###Facial Recognition Security System
+**Facial Recognition Security System**
 Developers: Ayden Blotnick and Ajitesh Batra
 
-###Notes and Installation Instructions
+**Notes and Installation Instructions**
 1. Use this tutorial in order to install openCV on a rpi: https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/
 
 2. Install AWS Command Line Interface (CLI) via pip3 install awscli --upgrade --user. Then check the version with the command "aws --version".  Lastly, run the command "aws configure" to properly set up the access key and region.
