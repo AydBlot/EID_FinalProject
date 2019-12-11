@@ -44,6 +44,7 @@ button {
 
 .btn {
   /* default for <button>, but useful for <a> */
+<<<<<<< HEAD
   display: flex;
   align-items:center;
   justify-content:center;
@@ -52,11 +53,22 @@ button {
   flex: 1;
   /* create a small space when buttons wrap on 2 lines */
   margin: 2px;
+=======
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+
+  /* create a small space when buttons wrap on 2 lines */
+  margin: 2px 0;
+>>>>>>> master
 
   /* invisible border (will be colored on hover/focus) */
   border: solid 1px transparent;
   border-radius: 4px;
+<<<<<<< HEAD
   cursor: pointer;
+=======
+>>>>>>> master
 
   /* size comes from text & padding (no width/height) */
   padding: 0.5em 1em;
@@ -84,6 +96,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+<<<<<<< HEAD
 .popup {
 	display: none;
 	position: fixed;
@@ -151,3 +164,6 @@ justify-content: center;
 	flex-direction: row;
 	margin: 0 -2px;
 }
+=======
+
+>>>>>>> master

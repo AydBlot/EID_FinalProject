@@ -25,7 +25,6 @@ var s3New = new AWS.S3({
   params: {Bucket: newAlbumBucketName}
 });
 
-var s3 = new AWS.S3();
 
 // A utility function to create HTML.
 function getHtml(template) {
@@ -35,7 +34,9 @@ function getHtml(template) {
 function openPopup(d){
 	var popup = document.getElementById("myPopup");
 	popup.classList.add("show");
-	document.getElementById("hiddenName").value = d.getAttribute("id");
+	var oldKey = d.getAttribute("id");
+	document.getElementById("hiddenName").value = oldKey
+	console.log(document.getElementById("hiddenName").value);
 }
 
 // Show the photos that exist in an album.
@@ -113,26 +114,26 @@ function cancelNameUpdate() {
 	popup.classList.remove("show");
 }
 
+const ws2 = new WebSocket('ws://localhost:8084/');
+	ws2.onopen = function() {
+	console.log('WebSocket Client Connected');	 };
+
+ws2.onmessage = function(received_data) {
+  	console.log("Received: '" + received_data.data + "'");
+	if(alert("Name Successfully Update")){}
+	else window.location.reload();
+}
+
 function updateName() {
 	var form = document.querySelector("#updateNameForm");
 	var formData = new FormData(form)
-	console.log(formData.get('newName'))
+	console.log(formData.get('newName'))	
 	newKey=formData.get('newName')
-        oldKey = formData.get('hiddenName')
-	//Copy the object to a new location
-	s3.copyObject({
-	  Bucket: knownAlbumBucketName, 
-	  CopySource: `${knownAlbumBucketName}${oldKey}`, 
-	  Key: newKey
-	 })
-	  .promise()
-	  .then(() => 
-	    // Delete the old object
-	    s3.deleteObject({
-	      Bucket: knownAlbumBucketName, 
-	      Key: newKey 
-	    }).promise()
-	   )
-	  // Error handling is left up to reader
-	  .catch((e) => console.error(e))	
+	var oldKey = document.forms['updateNameForm'].elements['hiddenName'].value;
+	var message_to_send = "update Name oldKey:" + oldKey + " newKey:" + newKey;
+
+	console.log(message_to_send);
+	ws2.send(message_to_send);
+	var popup = document.getElementById("myPopup");
+	popup.classList.remove("show");
 }
